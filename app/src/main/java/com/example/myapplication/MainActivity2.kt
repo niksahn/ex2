@@ -1,7 +1,7 @@
 package com.example.myapplication
 
 import android.content.Intent
-import android.graphics.Bitmap
+import android.graphics.BitmapFactory
 import android.os.Bundle
 import android.view.View
 import android.widget.ImageView
@@ -18,6 +18,7 @@ class MainActivity2 : AppCompatActivity() {
         setContentView(R.layout.activity_main2)
         textView2 = findViewById(R.id.textView)
         textView1 = findViewById(R.id.textVw1)
+        imageView1 = findViewById(R.id.imageView)
         show()
     }
 
@@ -38,9 +39,11 @@ class MainActivity2 : AppCompatActivity() {
 
         // Get the count from the intent extras
         var inent = Intent(this, MainActivity::class.java)
-
+        val extras = intent.extras
+        val byteArray = extras!!.getByteArray("picture")
+        val bmp = BitmapFactory.decodeByteArray(byteArray, 0, byteArray!!.size)
          //var bitmap  : Bitmap = inent.getParcelableExtra("BitmapImage")!!
-        imageView1.setImageBitmap(inent.getParcelableExtra("BitmapImage"))
+        imageView1.setImageBitmap(bmp)
 
 
         val inttext1 = intent.getStringExtra(text1)

@@ -2,11 +2,13 @@ package com.example.myapplication
 
 import android.content.Intent
 import android.graphics.Bitmap
+import android.graphics.drawable.BitmapDrawable
 import android.os.Bundle
 import android.view.View
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
+import java.io.ByteArrayOutputStream
 
 
 class MainActivity : AppCompatActivity() {
@@ -20,20 +22,23 @@ class MainActivity : AppCompatActivity() {
     }
 
     fun click() {
-        imageView1.buildDrawingCache()
-        val bitmap: Bitmap = imageView1.getDrawingCache()
+        val bitmap = (imageView1.getDrawable() as BitmapDrawable).bitmap
+        val stream = ByteArrayOutputStream()
+        bitmap.compress(Bitmap.CompressFormat.PNG, 100, stream)
+        val byteArray: ByteArray = stream.toByteArray()
         val secondActi = Intent(this, MainActivity2::class.java)
         val text1 = textView1.text.toString()
         val text2 = textView2.text.toString()
         secondActi.putExtra(MainActivity2.text1, text1)
         secondActi.putExtra(MainActivity2.text2, text2)
-        secondActi.putExtra("BitmapImage", bitmap);
+        secondActi.putExtra("picture", byteArray)
         startActivity(secondActi)
     }
 
-    fun click5(view: View) {
-        textView1 = findViewById(R.id.textView5)
-        textView2 = findViewById(R.id.textView5_1)
+    fun click5(view: View,textView: TextView) {
+        print(view.getId())
+        textView1 = findViewById(textView.getId())
+        textView2 = findViewById(textView.getId())
         imageView1 = findViewById(R.id.imageView5)
         click()
     }

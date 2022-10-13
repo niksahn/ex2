@@ -38,7 +38,8 @@
             android:layout_height="75dp"
             android:clickable="true"
             android:longClickable="false"
-            android:onClick="click1">
+            android:onClick="click1"
+            android:id="@+id/FrameLayout1">
 
             <ImageView
                 android:id="@+id/imageView1"
@@ -71,7 +72,8 @@
             android:layout_width="127dp"
             android:layout_height="75dp"
             android:layout_marginTop="20dp"
-            android:onClick="click2">
+            android:onClick="click2"
+            android:id="@+id/FrameLayout2">
 
             <ImageView
                 android:id="@+id/imageView2"
@@ -104,7 +106,8 @@
             android:layout_width="133dp"
             android:layout_height="75dp"
             android:layout_marginTop="20dp"
-            android:onClick="click3">
+            android:onClick="click3"
+            android:id="@+id/FrameLayout3">
 
             <ImageView
                 android:id="@+id/imageView3"
@@ -139,7 +142,8 @@
             android:layout_marginTop="20dp"
             android:clickable="true"
             android:contextClickable="false"
-            android:onClick="click4">
+            android:onClick="click4"
+            android:id="@+id/FrameLayout4">
 
             <ImageView
                 android:id="@+id/imageView4"
@@ -172,7 +176,8 @@
             android:layout_width="168dp"
             android:layout_height="75dp"
             android:layout_marginTop="20dp"
-            android:onClick="click5">
+            android:onClick="click5"
+            android:id="@+id/FrameLayout5">
 
             <ImageView
                 android:id="@+id/imageView5"
