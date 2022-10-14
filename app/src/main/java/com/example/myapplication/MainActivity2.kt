@@ -14,14 +14,14 @@ class MainActivity2 : AppCompatActivity() {
     private lateinit var textView1: TextView
     private lateinit var textView2: TextView
     private lateinit var imageView1: ImageView
-    private lateinit var Title:androidx.appcompat.widget.Toolbar
+    private lateinit var Title: androidx.appcompat.widget.Toolbar
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main2)
         textView2 = findViewById(R.id.textView)
         textView1 = findViewById(R.id.textVw1)
         imageView1 = findViewById(R.id.imageView)
-        Title=findViewById(R.id.toolbar)
+        Title = findViewById(R.id.toolbar)
         show()
     }
 
@@ -46,7 +46,7 @@ class MainActivity2 : AppCompatActivity() {
         val extras = intent.extras
         val byteArray = extras!!.getByteArray("picture")
         val bmp = BitmapFactory.decodeByteArray(byteArray, 0, byteArray!!.size)
-         //var bitmap  : Bitmap = inent.getParcelableExtra("BitmapImage")!!
+        //var bitmap  : Bitmap = inent.getParcelableExtra("BitmapImage")!!
         imageView1.setImageBitmap(bmp)
 
 
@@ -55,7 +55,7 @@ class MainActivity2 : AppCompatActivity() {
 
         textView1.text = inttext1
         textView2.text = inttext2
-        Title.title=intent.getStringExtra(titlee)
+        Title.title = intent.getStringExtra(titlee)
     }
 
 }

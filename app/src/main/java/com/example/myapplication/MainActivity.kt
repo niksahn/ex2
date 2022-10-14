@@ -37,10 +37,11 @@ class MainActivity : AppCompatActivity() {
         secondActi.putExtra("picture", byteArray)
         try {
             //if (view.id!=null and view.id )
-          title= findViewById(view.id)
-          secondActi.putExtra(MainActivity2.titlee, title.text)
+            title = findViewById(view.id)
+            secondActi.putExtra(MainActivity2.titlee, title.text)
 
-        }catch (e:Exception){}
+        } catch (e: Exception) {
+        }
         startActivity(secondActi)
     }
 
