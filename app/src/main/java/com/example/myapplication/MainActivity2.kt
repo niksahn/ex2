@@ -30,6 +30,8 @@ class MainActivity2 : AppCompatActivity() {
         const val text1 = "text1"
         const val text2 = "text2"
         const val titlee = "title"
+        const val piture = "1"
+
 
 
     }
@@ -43,13 +45,11 @@ class MainActivity2 : AppCompatActivity() {
 
         // Get the count from the intent extras
         var inent = Intent(this, MainActivity::class.java)
-        val extras = intent.extras
-        val byteArray = extras!!.getByteArray("picture")
-        val bmp = BitmapFactory.decodeByteArray(byteArray, 0, byteArray!!.size)
         //var bitmap  : Bitmap = inent.getParcelableExtra("BitmapImage")!!
-        imageView1.setImageBitmap(bmp)
-
-
+        val inmage = intent.getStringExtra(piture)
+        val drawableResourceId =this.resources.getIdentifier(inmage, "drawable", this.packageName)
+        imageView1.setImageResource(drawableResourceId)
+       // imageView1.setImageResource(picture.toInt())
         val inttext1 = intent.getStringExtra(text1)
         val inttext2 = intent.getStringExtra(text2)
 

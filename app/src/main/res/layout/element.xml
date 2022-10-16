@@ -21,9 +21,10 @@
 
         android:layout_marginStart="67dp"
 
+        android:onClick="click"
         android:padding="0dp"
         android:paddingStart="0dp"
-        android:text="Ели" />
+        android:text="" />
 
     <TextView
         android:id="@+id/textView1_1"
@@ -33,5 +34,6 @@
         android:layout_marginStart="67dp"
         android:layout_marginTop="57dp"
 
-        android:text="Мясо" />
+        android:onClick="click"
+        android:text="" />
 </FrameLayout>
