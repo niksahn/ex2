@@ -1,4 +1,5 @@
 package com.example.myapplication
+
 import android.content.Intent
 import android.os.Bundle
 import android.view.View
@@ -7,6 +8,7 @@ import android.widget.ImageView
 import android.widget.LinearLayout
 import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
+
 class MainActivity : AppCompatActivity() {
     private var name = arrayOf(
         "Ели", "Мужики", "Запивали", "Конюх", "Они"
@@ -31,7 +33,8 @@ class MainActivity : AppCompatActivity() {
         showingitems()
 
     }
-    fun showingitems(){
+
+    fun showingitems() {
         val ltInflater = layoutInflater
         for (i in 0 until name.size) {
             val item: View = ltInflater.inflate(R.layout.element, linLayout, false)
