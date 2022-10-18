@@ -32,7 +32,6 @@ class MainActivity2 : AppCompatActivity() {
         const val piture = "1"
 
 
-
     }
 
     fun retur(view: View) {
@@ -46,9 +45,9 @@ class MainActivity2 : AppCompatActivity() {
         var inent = Intent(this, MainActivity::class.java)
         //var bitmap  : Bitmap = inent.getParcelableExtra("BitmapImage")!!
         val inmage = intent.getStringExtra(piture)
-        val drawableResourceId =this.resources.getIdentifier(inmage, "drawable", this.packageName)
+        val drawableResourceId = this.resources.getIdentifier(inmage, "drawable", this.packageName)
         imageView1.setImageResource(drawableResourceId)
-       // imageView1.setImageResource(picture.toInt())
+        // imageView1.setImageResource(picture.toInt())
         val inttext1 = intent.getStringExtra(text1)
         val inttext2 = intent.getStringExtra(text2)
         textView1.text = inttext1
