@@ -29,7 +29,6 @@ class MainActivity2 : AppCompatActivity() {
 
         const val text1 = "text1"
         const val text2 = "text2"
-        const val titlee = "title"
         const val piture = "1"
 
 
@@ -52,10 +51,9 @@ class MainActivity2 : AppCompatActivity() {
        // imageView1.setImageResource(picture.toInt())
         val inttext1 = intent.getStringExtra(text1)
         val inttext2 = intent.getStringExtra(text2)
-
         textView1.text = inttext1
         textView2.text = inttext2
-        Title.title = intent.getStringExtra(titlee)
+        Title.title = intent.getStringExtra(text1)
     }
 
 }

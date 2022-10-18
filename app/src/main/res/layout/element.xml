@@ -21,7 +21,7 @@
 
         android:layout_marginStart="67dp"
 
-        android:onClick="click"
+
         android:padding="0dp"
         android:paddingStart="0dp"
         android:text="" />
@@ -34,6 +34,6 @@
         android:layout_marginStart="67dp"
         android:layout_marginTop="57dp"
 
-        android:onClick="click"
+
         android:text="" />
 </FrameLayout>
