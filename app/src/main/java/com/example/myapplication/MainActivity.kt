@@ -19,6 +19,8 @@ class MainActivity : AppCompatActivity() {
         "img", "img", "img", "img", "img"
     )
     private lateinit var title: TextView
+
+
     private lateinit var textView1: TextView
     private lateinit var textView2: TextView
     private lateinit var linLayout: LinearLayout
