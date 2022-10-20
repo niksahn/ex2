@@ -2,10 +2,6 @@ package com.example.myapplication
 
 import android.content.Intent
 import android.os.Bundle
-import android.view.LayoutInflater
-import android.view.View
-import android.view.ViewGroup
-import android.widget.FrameLayout
 import android.widget.ImageView
 import android.widget.LinearLayout
 import android.widget.TextView
@@ -30,7 +26,7 @@ class MainActivity : AppCompatActivity() {
 
     }
 
-    fun showingitems() {
+    /*fun showingitems() {
         val ltInflater = layoutInflater
         for (i in 0 until 5) {
             val item: View = ltInflater.inflate(R.layout.element, linLayout, false)
@@ -47,10 +43,9 @@ class MainActivity : AppCompatActivity() {
             item.setOnClickListener({ click(i) })
             linLayout.addView(item)
         }
-    }
-
-    fun click(i: Int) {
-        val secondActi = Intent(this, MainActivity2::class.java)
+    }*/
+    fun click(i: Int, holder: CustomRecyclerAdapter.MyViewHolder) {
+        val secondActi = Intent(holder.cont, MainActivity2::class.java)
         val text1 = name[i].title
         val text2 = name[i].subTitle
         secondActi.putExtra(MainActivity2.text1, text1)
@@ -58,4 +53,6 @@ class MainActivity : AppCompatActivity() {
         secondActi.putExtra(MainActivity2.piture, name[i].imagine)
         startActivity(secondActi)
     }
+
+
 }
