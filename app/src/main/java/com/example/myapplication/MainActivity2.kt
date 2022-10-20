@@ -6,6 +6,7 @@ import android.view.View
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
+import com.bumptech.glide.Glide
 
 
 class MainActivity2 : AppCompatActivity() {
@@ -39,13 +40,17 @@ class MainActivity2 : AppCompatActivity() {
 
     fun show() {
 
-        // Get the count from the intent extras
-        var inent = Intent(this, MainActivity::class.java)
-        //var bitmap  : Bitmap = inent.getParcelableExtra("BitmapImage")!!
+
+        //var inent = Intent(this, MainActivity::class.java)
+
         val inmage = intent.getStringExtra(piture)
-        val drawableResourceId = this.resources.getIdentifier(inmage, "drawable", this.packageName)
-        imageView1.setImageResource(drawableResourceId)
-        // imageView1.setImageResource(picture.toInt())
+        //val drawableResourceId = this.resources.getIdentifier(inmage, "drawable", this.packageName)
+        Glide
+            .with(this)
+            .load(inmage)
+            .into(this.imageView1);
+
+
         val inttext1 = intent.getStringExtra(text1)
         val inttext2 = intent.getStringExtra(text2)
         textView1.text = inttext1

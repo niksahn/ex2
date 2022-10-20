@@ -1,5 +1,4 @@
 package com.example.myapplication
-
 import android.content.Intent
 import android.view.LayoutInflater
 import android.view.View
@@ -9,7 +8,6 @@ import android.widget.ImageView
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
-
 class CustomRecyclerAdapter() :
     RecyclerView.Adapter<CustomRecyclerAdapter.MyViewHolder>() {
 
@@ -31,12 +29,10 @@ class CustomRecyclerAdapter() :
         holder.title.text = name[position].title
         holder.subtitle.text = name[position].subTitle
         holder.itemView.setOnClickListener { click(position, holder) }
-        val a = name[position].imagine
-        val drawableResourceId =
-            holder.cont.resources.getIdentifier("$a", "drawable", holder.cont.packageName)
+
         Glide
             .with(holder.imageView1)
-            .load(drawableResourceId)
+            .load(name[position].imagine)
             .into(holder.imageView1);
     }
 
