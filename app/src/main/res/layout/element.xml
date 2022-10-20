@@ -17,7 +17,7 @@
         android:layout_gravity="left"
         android:scaleType="centerCrop"
         android:visibility="visible"
-        tools:srcCompat="@drawable/cat" />
+         />
 
     <TextView
         android:id="@+id/textView1"

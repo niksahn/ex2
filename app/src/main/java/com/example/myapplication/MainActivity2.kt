@@ -39,18 +39,11 @@ class MainActivity2 : AppCompatActivity() {
     }
 
     fun show() {
-
-
-        //var inent = Intent(this, MainActivity::class.java)
-
         val inmage = intent.getStringExtra(piture)
-        //val drawableResourceId = this.resources.getIdentifier(inmage, "drawable", this.packageName)
         Glide
             .with(this)
             .load(inmage)
             .into(this.imageView1);
-
-
         val inttext1 = intent.getStringExtra(text1)
         val inttext2 = intent.getStringExtra(text2)
         textView1.text = inttext1

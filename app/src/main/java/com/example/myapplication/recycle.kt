@@ -1,4 +1,5 @@
 package com.example.myapplication
+
 import android.content.Intent
 import android.view.LayoutInflater
 import android.view.View
@@ -8,11 +9,11 @@ import android.widget.ImageView
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
+
 class CustomRecyclerAdapter() :
     RecyclerView.Adapter<CustomRecyclerAdapter.MyViewHolder>() {
 
     class MyViewHolder(item: View) : RecyclerView.ViewHolder(item) {
-        val itemView: FrameLayout = item.findViewById(R.id.FrameLayout1)
         val cont = item.context
         val title: TextView = item.findViewById(R.id.textView1)
         val subtitle: TextView = item.findViewById(R.id.textView1_1)
@@ -20,8 +21,8 @@ class CustomRecyclerAdapter() :
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MyViewHolder {
-        val item = LayoutInflater.from(parent.context).inflate(R.layout.element, parent, false)
 
+        val item = LayoutInflater.from(parent.context).inflate(R.layout.element, parent, false)
         return MyViewHolder(item)
     }
 
