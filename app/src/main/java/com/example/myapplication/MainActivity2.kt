@@ -33,9 +33,9 @@ class MainActivity2 : AppCompatActivity() {
 
     }
 
+
     fun retur(view: View) {
-        val firstActi = Intent(this, MainActivity::class.java)
-        startActivity(firstActi)
+        finish()
     }
 
     fun show() {

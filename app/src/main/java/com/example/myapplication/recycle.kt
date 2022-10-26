@@ -4,7 +4,6 @@ import android.content.Intent
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.FrameLayout
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
@@ -12,6 +11,7 @@ import com.bumptech.glide.Glide
 
 class CustomRecyclerAdapter() :
     RecyclerView.Adapter<CustomRecyclerAdapter.MyViewHolder>() {
+    private var name: List<ListItemData> = ArrayList()
 
     class MyViewHolder(item: View) : RecyclerView.ViewHolder(item) {
         val cont = item.context
@@ -25,7 +25,10 @@ class CustomRecyclerAdapter() :
         val item = LayoutInflater.from(parent.context).inflate(R.layout.element, parent, false)
         return MyViewHolder(item)
     }
-
+    fun refreshUsers(users: List<ListItemData>) {
+        this.name = users
+        notifyDataSetChanged()
+    }
     override fun onBindViewHolder(holder: MyViewHolder, position: Int) {
         holder.title.text = name[position].title
         holder.subtitle.text = name[position].subTitle
