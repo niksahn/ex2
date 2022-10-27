@@ -5,7 +5,7 @@ plugins {
 
 android {
     namespace 'com.example.myapplication'
-    compileSdk 32
+    compileSdk 33
 
     defaultConfig {
         applicationId "com.example.myapplication"
@@ -36,7 +36,7 @@ dependencies {
 
 
 
-
+    implementation "androidx.activity:activity-ktx:1.6.1"
     implementation 'androidx.recyclerview:recyclerview:1.2.1'
     implementation 'com.github.bumptech.glide:glide:4.12.0'
     implementation 'androidx.core:core-ktx:1.7.0'

@@ -1,5 +1,6 @@
 package com.example.myapplication
 import android.os.Bundle
+import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
@@ -8,7 +9,7 @@ import androidx.recyclerview.widget.RecyclerView
 
 
 class MainActivity : AppCompatActivity() {
-    private val ViewModel by lazy {ViewModelProvider(this).get(MyViewModel::class.java)}
+    private val viewModel by viewModels<MyViewModel>()
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
@@ -20,11 +21,11 @@ class MainActivity : AppCompatActivity() {
 
         recyclerView.adapter = adapter
         //val model = ViewModelProvider(this).get(MyViewModel::class.java)
-        ViewModel.getList().observe(this, Observer {
+        viewModel.name.observe(this) {
             it?.let {
                 adapter.refreshUsers(it)
             }
-        })
+        }
         //model.execute()
     }
 
