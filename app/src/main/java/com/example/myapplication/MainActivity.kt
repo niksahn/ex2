@@ -23,7 +23,7 @@ class MainActivity : AppCompatActivity() {
         //val model = ViewModelProvider(this).get(MyViewModel::class.java)
         viewModel.name.observe(this) {
             it?.let {
-                adapter.refreshUsers(it)
+                adapter.name = it
             }
         }
         //model.execute()
