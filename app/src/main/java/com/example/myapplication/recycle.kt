@@ -34,23 +34,23 @@ class CustomRecyclerAdapter() :
 
 
     override fun onBindViewHolder(holder: MyViewHolder, position: Int) {
-        holder.title.text = name[position].title
-        holder.subtitle.text = name[position].subTitle
+        holder.title.text = name[position].name
+        holder.subtitle.text ="type: " +name[position].species + ", status:" +name[position].status
         holder.itemView.setOnClickListener { click(position, holder) }
 
         Glide
             .with(holder.imageView1)
-            .load(name[position].imagine)
+            .load(name[position].image)
             .into(holder.imageView1);
     }
 
     fun click(i: Int, holder: MyViewHolder) {
         val secondActi = Intent(holder.cont, MainActivity2::class.java)
-        val text1 = name[i].title
-        val text2 = name[i].subTitle
+        val text1 = name[i].name
+        val text2 = " type: " +name[i].species + ", status:" +name[i].status
         secondActi.putExtra(MainActivity2.text1, text1)
         secondActi.putExtra(MainActivity2.text2, text2)
-        secondActi.putExtra(MainActivity2.piture, name[i].imagine)
+        secondActi.putExtra(MainActivity2.piture, name[i].image)
         holder.cont.startActivity(secondActi)
     }
 

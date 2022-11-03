@@ -1,37 +1,48 @@
 package com.example.myapplication;
-data class ll(
-    val info: Info,
-    val results: List<ListItemData>
+
+
+
+import com.google.gson.annotations.SerializedName
+data class rezults (
+
+    @SerializedName("info"    ) var info    : Info?              = Info(),
+    @SerializedName("results" ) var ListItemData : ArrayList<ListItemData> = arrayListOf()
+
 )
 
-data class Info(
-    val count: Int,
-    val next: String,
-    val pages: Int,
-    val prev: Any
-)
+data class Info (
 
-data class ListItemData(
-    val created: String,
-    val episode: List<String>,
-    val gender: String,
-    val id: Int,
-    val image: String,
-    val location: Location,
-    val name: String,
-    val origin: Origin,
-    val species: String,
-    val status: String,
-    val type: String,
-    val url: String
-)
+    @SerializedName("count" ) var count : Int?    = null,
+    @SerializedName("pages" ) var pages : Int?    = null,
+    @SerializedName("next"  ) var next  : String? = null,
+    @SerializedName("prev"  ) var prev  : String? = null
 
-data class Location(
-    val name: String,
-    val url: String
 )
+data class Origin (
 
-data class Origin(
-    val name: String,
-    val url: String
+    @SerializedName("name" ) var name : String? = null,
+    @SerializedName("url"  ) var url  : String? = null
+
+)
+data class Location (
+
+    @SerializedName("name" ) var name : String? = null,
+    @SerializedName("url"  ) var url  : String? = null
+
+)
+data class ListItemData (
+
+    @SerializedName("id"       ) var id       : Int?              = null,
+    @SerializedName("name"     ) var name     : String?           = null,
+    @SerializedName("status"   ) var status   : String?           = null,
+    @SerializedName("species"  ) var species  : String?           = null,
+    @SerializedName("type"     ) var type     : String?           = null,
+    @SerializedName("gender"   ) var gender   : String?           = null,
+    @SerializedName("origin"   ) var origin   : Origin?           = Origin(),
+    @SerializedName("location" ) var location : Location?         = Location(),
+    @SerializedName("image"    ) var image    : String?           = null,
+    @SerializedName("episode"  ) var episode  : ArrayList<String> = arrayListOf(),
+    @SerializedName("url"      ) var url      : String?           = null,
+    @SerializedName("created"  ) var created  : String?           = null
+
 )

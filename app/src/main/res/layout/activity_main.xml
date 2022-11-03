@@ -23,7 +23,7 @@
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:title="Мое приложение"
+        app:title="Персонажи Рика и Морти"
         app:titleMargin="0dp"
         app:titleMarginStart="100dp"
         app:titleTextColor="#C4FFFFFF" />
