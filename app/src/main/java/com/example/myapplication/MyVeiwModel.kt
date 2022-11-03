@@ -22,44 +22,37 @@ interface RickApi {
 
         ): Call<rezults>
 }
+fun rickapi():RickApi{
+    val baseurl = "https://rickandmortyapi.com"
+    val retrofit = Retrofit.Builder()
+        .baseUrl(baseurl)
+        .addConverterFactory(GsonConverterFactory.create())
+        .build()
+    return retrofit.create(RickApi::class.java)}
 
 //https://rickandmortyapi.com/api/character/?name=rick
 class MyViewModel : ViewModel() {
     var name: MutableLiveData<ArrayList<ListItemData>> = MutableLiveData()
 
     init {
-        viewModelScope.launch { generate() }
-
+            generate()
+            name.value?.sortBy {it.id}
     }
 
     private  fun generate() {
-        val baseurl = "https://rickandmortyapi.com"
-
-        val retrofit = Retrofit.Builder()
-            .baseUrl(baseurl)
-            .addConverterFactory(GsonConverterFactory.create())
-            .build()
-        val rickApi = retrofit.create(RickApi::class.java)
+        val rickApi = rickapi()
         var k = 42
-
-
         var names = ArrayList<ListItemData>()
-
-
         for (i in 1 until k) {
             rickApi.getData(i.toString()).enqueue(object : Callback<rezults> {
                 override fun onResponse(call: Call<rezults>, response: Response<rezults>) {
                     names +=  response.body()?.ListItemData ?: ArrayList<ListItemData>()
                     name.value = names
                 }
-
                 override fun onFailure(call: Call<rezults>, t: Throwable) {
                 }
             })
         }
-
-        println(name.value)
-        println(names)
         /*fun getUsers(): Flow<ArrayList<ListItemData>> = flow {
             var names = ArrayList<ListItemData>()
             var response = rickApi.getData("1").execute()

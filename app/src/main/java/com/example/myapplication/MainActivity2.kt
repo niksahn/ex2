@@ -9,7 +9,7 @@ import androidx.appcompat.app.AppCompatActivity
 import com.bumptech.glide.Glide
 
 
-class MainActivity2 : AppCompatActivity() {
+class  MainActivity2 : AppCompatActivity() {
     private lateinit var textView1: TextView
     private lateinit var textView2: TextView
     private lateinit var imageView1: ImageView

@@ -1,12 +1,12 @@
 package com.example.myapplication
-
 import android.os.Bundle
+import android.text.Editable
+import android.text.TextWatcher
+import android.widget.EditText
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import retrofit2.Retrofit
-import retrofit2.converter.gson.GsonConverterFactory
 
 
 class MainActivity : AppCompatActivity() {
@@ -18,17 +18,34 @@ class MainActivity : AppCompatActivity() {
         setSupportActionBar(findViewById(R.id.toolbar2))
         val recyclerView: RecyclerView = findViewById(R.id.recyclerView)
         recyclerView.layoutManager = LinearLayoutManager(this)
-        val adapter = CustomRecyclerAdapter()
-
-
+        val adapter = CustomRecyclerAdapter("")
+        val editText = findViewById<EditText>(R.id.editTextTextPersonName)
         recyclerView.adapter = adapter
-        //val model = ViewModelProvider(this).get(MyViewModel::class.java)
         viewModel.name.observe(this) {
             it?.let {
                 adapter.name = it
             }
         }
-        //model.execute()
+
+        editText.addTextChangedListener(object : TextWatcher {
+            override fun beforeTextChanged(s: CharSequence, start: Int, count: Int, after: Int) {}
+            override fun onTextChanged(s: CharSequence, start: Int, before: Int, count: Int) {
+                val adapter = CustomRecyclerAdapter(s.toString())
+                recyclerView.adapter = adapter
+                viewModel.name.observe(this@MainActivity) {
+                    it?.let {
+                        adapter.name = it
+                        println( adapter.name)
+                    }
+                }
+
+                
+            }
+
+            override fun afterTextChanged(s: Editable) {}
+        })
+        
+
     }
 
 }
