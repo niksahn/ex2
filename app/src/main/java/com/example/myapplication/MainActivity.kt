@@ -1,8 +1,8 @@
 package com.example.myapplication
+
 import android.os.Bundle
 import android.text.Editable
-import android.text.TextWatcher
-import android.widget.EditText
+import android.widget.*
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -10,7 +10,6 @@ import androidx.recyclerview.widget.RecyclerView
 
 
 class MainActivity : AppCompatActivity() {
-
     private val viewModel by viewModels<MyViewModel>()
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -19,7 +18,8 @@ class MainActivity : AppCompatActivity() {
         val recyclerView: RecyclerView = findViewById(R.id.recyclerView)
         recyclerView.layoutManager = LinearLayoutManager(this)
         val adapter = CustomRecyclerAdapter("")
-        val editText = findViewById<EditText>(R.id.editTextTextPersonName)
+        val autoCompleteTextView = findViewById<AutoCompleteTextView>(R.id.autoCompleteTextView)
+        val button = findViewById<Button>(R.id.button)
         recyclerView.adapter = adapter
         viewModel.name.observe(this) {
             it?.let {
@@ -27,25 +27,30 @@ class MainActivity : AppCompatActivity() {
             }
         }
 
-        editText.addTextChangedListener(object : TextWatcher {
-            override fun beforeTextChanged(s: CharSequence, start: Int, count: Int, after: Int) {}
-            override fun onTextChanged(s: CharSequence, start: Int, before: Int, count: Int) {
-                val adapter = CustomRecyclerAdapter(s.toString())
-                recyclerView.adapter = adapter
-                viewModel.name.observe(this@MainActivity) {
-                    it?.let {
-                        adapter.name = it
-                        println( adapter.name)
-                    }
+        button.setOnClickListener {
+            val adapter = CustomRecyclerAdapter(autoCompleteTextView.text.toString())
+            recyclerView.adapter = adapter
+            viewModel.name.observe(this@MainActivity) {
+                it?.let {
+                    adapter.name = it
                 }
-
-                
             }
-
-            override fun afterTextChanged(s: Editable) {}
-        })
-        
-
+        }
     }
 
 }
+
+
+
+
+
+/* autoCompleteTextView.onItemClickListener = AdapterView.OnItemClickListener { parent, _,
+                                                                                     position, id ->
+            autoCompleteTextView.text= parent.getItemAtPosition(position) as Editable?
+        }
+history.add(autoCompleteTextView.text.toString())
+            if (history.size>6 ){history.removeAt(0)}
+            val histadapter: ArrayAdapter<String> =
+                ArrayAdapter<String>(this@MainActivity, R.layout.activity_main,R.id.autoCompleteTextView, history)
+            autoCompleteTextView.setAdapter(histadapter)*/
+

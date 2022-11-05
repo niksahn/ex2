@@ -22,7 +22,7 @@ class CustomRecyclerAdapter(string: String) :
 
 
     class MyViewHolder(item: View) : RecyclerView.ViewHolder(item) {
-        val params: LinearLayout.LayoutParams? = null
+
         val cont = item.context
         val title: TextView = item.findViewById(R.id.textView1)
         val subtitle: TextView = item.findViewById(R.id.textView1_1)

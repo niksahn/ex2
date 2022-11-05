@@ -14,12 +14,11 @@ import kotlinx.coroutines.*
 import retrofit2.Callback
 import retrofit2.Response
 
-
+val history= ArrayList<String>()
 interface RickApi {
     @GET("/api/character")
     fun getData(
         @Query("page") id: String?,
-
         ): Call<rezults>
 }
 fun rickapi():RickApi{
@@ -29,10 +28,9 @@ fun rickapi():RickApi{
         .addConverterFactory(GsonConverterFactory.create())
         .build()
     return retrofit.create(RickApi::class.java)}
-
-//https://rickandmortyapi.com/api/character/?name=rick
 class MyViewModel : ViewModel() {
     var name: MutableLiveData<ArrayList<ListItemData>> = MutableLiveData()
+
 
     init {
             generate()
