@@ -55,31 +55,7 @@ class MyViewModel : ViewModel() {
         }
     }}
 
-        /*val rickApi = rickapi()
-        var k = 42
-        var names = ArrayList<ListItemData>()
-        for (i in 1 until k) {
-            rickApi.getData(i.toString()).enqueue(object : Callback<rezults> {
-                override fun onResponse(call: Call<rezults>, response: Response<rezults>) {
-                    names +=  response.body()?.ListItemData ?: ArrayList<ListItemData>()
-                    name.value = names
-                }
-                override fun onFailure(call: Call<rezults>, t: Throwable) {
-                }
-            })
-        }*/
-        /*fun getUsers(): Flow<ArrayList<ListItemData>> = flow {
-            var names = ArrayList<ListItemData>()
-            var response = rickApi.getData("1").execute()
-            k = response.body()!!.info!!.pages!!
-            println(k)
-            for (i in 1 until k) {
-                response = rickApi.getData(i.toString()).execute()
-                names += response.body()!!.ListItemData
-            }
-            emit(names)
-        }.flowOn(Dispatchers.Default)
-        getUsers().collect { names -> name.value = names }*/
+
 
 
 
