@@ -2,4 +2,7 @@
     <string name="app_name">My Application</string>
     <string name="name">Name</string>
     <string name="textview">TextView</string>
+    <string name="texthint">Введите имя персонажа</string>
+    <string name="button">Найти</string>
+    <string name="texttoolbar">Персонажи Рика и Морти</string>
 </resources>

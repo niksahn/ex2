@@ -11,9 +11,13 @@ import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 
 
-class CustomRecyclerAdapter(string: String) :
+class CustomRecyclerAdapter() :
     RecyclerView.Adapter<CustomRecyclerAdapter.MyViewHolder>() {
-    var string=string
+    var string: String=""
+        set(value) {
+            field = value
+            notifyDataSetChanged()
+        }
     var name: List<ListItemData> = ArrayList()
         set(value) {
             field = value
@@ -46,7 +50,7 @@ class CustomRecyclerAdapter(string: String) :
             .with(holder.imageView1)
             .load(name[position].image)
             .into(holder.imageView1)
-        if(!name[position].name?.contains(string)!!)
+        if(name[position].name?.contains(string)==false)
         {
             holder.itemView.layoutParams.height = 0
             holder.itemView.visibility = View.GONE

@@ -29,16 +29,33 @@ fun rickapi():RickApi{
         .build()
     return retrofit.create(RickApi::class.java)}
 class MyViewModel : ViewModel() {
-    var name: MutableLiveData<ArrayList<ListItemData>> = MutableLiveData()
-
-
+    var name: MutableLiveData<List<ListItemData>> = MutableLiveData()
     init {
             generate()
-            name.value?.sortBy {it.id}
     }
+    private fun generate() = viewModelScope.launch(Dispatchers.IO) {
+        supervisorScope {
+            val rickApi = rickapi()
+            val k = 42
+            val jobList = mutableListOf<Deferred<Response<rezults>>>()
+            for (i in 1 until k) {
+                jobList.add(async { rickApi.getData(i.toString()).execute() })
+            }
+            val listOfResults = jobList.mapNotNull {
+                runCatching {
+                    it.await()
+                }.getOrNull()
+            }
+            name.postValue(listOfResults.let { responseList ->
+                responseList.mapNotNull { it.body()?.ListItemData?.toList() }
+                    .reduceRightOrNull() { cur, acc ->
+                        acc + cur
+                    }?.sortedBy { it.id } ?: emptyList()
+            } )
+        }
+    }}
 
-    private  fun generate() {
-        val rickApi = rickapi()
+        /*val rickApi = rickapi()
         var k = 42
         var names = ArrayList<ListItemData>()
         for (i in 1 until k) {
@@ -50,7 +67,7 @@ class MyViewModel : ViewModel() {
                 override fun onFailure(call: Call<rezults>, t: Throwable) {
                 }
             })
-        }
+        }*/
         /*fun getUsers(): Flow<ArrayList<ListItemData>> = flow {
             var names = ArrayList<ListItemData>()
             var response = rickApi.getData("1").execute()
@@ -64,6 +81,6 @@ class MyViewModel : ViewModel() {
         }.flowOn(Dispatchers.Default)
         getUsers().collect { names -> name.value = names }*/
 
-    }
 
-}
+
+

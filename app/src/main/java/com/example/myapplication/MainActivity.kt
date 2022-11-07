@@ -8,7 +8,7 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 
-
+val adapter = CustomRecyclerAdapter()
 class MainActivity : AppCompatActivity() {
     private val viewModel by viewModels<MyViewModel>()
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -17,7 +17,6 @@ class MainActivity : AppCompatActivity() {
         setSupportActionBar(findViewById(R.id.toolbar2))
         val recyclerView: RecyclerView = findViewById(R.id.recyclerView)
         recyclerView.layoutManager = LinearLayoutManager(this)
-        val adapter = CustomRecyclerAdapter("")
         val autoCompleteTextView = findViewById<AutoCompleteTextView>(R.id.autoCompleteTextView)
         val button = findViewById<Button>(R.id.button)
         recyclerView.adapter = adapter
@@ -26,13 +25,11 @@ class MainActivity : AppCompatActivity() {
                 adapter.name = it
             }
         }
-
         button.setOnClickListener {
-            val adapter = CustomRecyclerAdapter(autoCompleteTextView.text.toString())
-            recyclerView.adapter = adapter
             viewModel.name.observe(this@MainActivity) {
                 it?.let {
                     adapter.name = it
+                    adapter.string=autoCompleteTextView.text.toString()
                 }
             }
         }
