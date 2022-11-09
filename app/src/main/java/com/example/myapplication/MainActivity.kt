@@ -1,17 +1,24 @@
 package com.example.myapplication
 
 import android.os.Bundle
-import android.text.Editable
 import android.widget.*
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import androidx.room.Room
+import kotlin.concurrent.thread
 
 val adapter = CustomRecyclerAdapter()
+
 class MainActivity : AppCompatActivity() {
+
     private val viewModel by viewModels<MyViewModel>()
     override fun onCreate(savedInstanceState: Bundle?) {
+        val db = Room.databaseBuilder(
+            applicationContext ,
+            AppDatabase::class.java, "todo-list.db"
+        ).build()
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
         setSupportActionBar(findViewById(R.id.toolbar2))
@@ -20,9 +27,13 @@ class MainActivity : AppCompatActivity() {
         val autoCompleteTextView = findViewById<AutoCompleteTextView>(R.id.autoCompleteTextView)
         val button = findViewById<Button>(R.id.button)
         recyclerView.adapter = adapter
+
+
+
         viewModel.name.observe(this) {
             it?.let {
                 adapter.name = it
+                db.personDao.insertUser(it)
             }
         }
         button.setOnClickListener {
@@ -33,6 +44,8 @@ class MainActivity : AppCompatActivity() {
                 }
             }
         }
+thread {  println(db.personDao.getUsers())}
+        println("llooooooooooool")
     }
 
 }
