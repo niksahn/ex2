@@ -25,8 +25,6 @@ class MainActivity : AppCompatActivity() {
 
 
         val mSettings = getSharedPreferences(APP_PREFERENCES, Context.MODE_PRIVATE)
-        //val editor: SharedPreferences.Editor = mSettings.edit()
-        //if (!mSettings.contains(APP_PREFERENCES_TIME))editor.putString(APP_PREFERENCES_TIME, Instant. now().toString())
 
 
 
@@ -35,10 +33,7 @@ class MainActivity : AppCompatActivity() {
             AppDatabase::class.java, "pers.db"
         ).build()
         val viewModel=MyViewModel(mSettings,db)
-        //val viewModel by viewModels<MyViewModel>()
 
-        /*viewModel.db=db
-        viewModel.mSettings=mSettings*/
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
         setSupportActionBar(findViewById(R.id.toolbar2))
@@ -51,7 +46,7 @@ class MainActivity : AppCompatActivity() {
         viewModel.name.observe(this) {
             it?.let {
                 adapter.name = it
-                //db.personDao.insertUser(it)
+
             }
         }
         button.setOnClickListener {

@@ -92,7 +92,7 @@ interface PersonDao {
 
 
 
-class Interconverted {
+/*class Interconverted {
     @RequiresApi(Build.VERSION_CODES.N)
     @TypeConverter
     fun fromHobbies(hobbies: ArrayList<java.lang.String>): String {
@@ -135,4 +135,4 @@ class Converterlocation {
         origin.url=(data.split(",".toRegex())[1])
         return origin
     }
-}
+}*/

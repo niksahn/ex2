@@ -114,15 +114,6 @@ class MyViewModel(mSettings: SharedPreferences, db: AppDatabase) : ViewModel() {
 
 
 
-///generate
-//()
-//name== db.personDao.allPeople
-// println(name)
-
-// db.personDao.insertAll(name)
-// name== db.personDao.allPeople
-// println(name)
-
 
 
 
