@@ -2,12 +2,10 @@ package com.example.myapplication;
 
 import android.os.Build
 import androidx.annotation.RequiresApi
-import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.room.*
 import com.google.gson.annotations.SerializedName
 import io.reactivex.rxjava3.core.Completable
-import io.reactivex.rxjava3.core.Maybe
 import kotlin.collections.ArrayList
 
 data class rezults (
@@ -65,15 +63,11 @@ data class ListItemData(
 
 @Dao
 interface PersonDao {
-    // Добавление Person в бд
+
     @Query("SELECT * FROM users")
     fun getUsers(): List<ListItemData>
-    @Insert
-    fun insertUser(users: List<ListItemData>): Completable
-    @Delete
-    fun deleteUser(user: List<ListItemData>): Completable
-    @Update
-    fun updateUser(user: ListItemData): Completable
+    @Insert(onConflict = OnConflictStrategy.REPLACE)
+    fun insertUser(users: List<ListItemData>)
 }
 
 

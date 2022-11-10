@@ -2,18 +2,15 @@ package com.example.myapplication
 
 
 
+import android.content.SharedPreferences
+import android.os.Build
+import androidx.annotation.RequiresApi
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import androidx.room.Database
-import androidx.room.Room
 import androidx.room.RoomDatabase
-import androidx.room.TypeConverters
-
-import androidx.test.core.app.ApplicationProvider.getApplicationContext
-
 import kotlinx.coroutines.*
-import kotlinx.coroutines.flow.*
 
 import retrofit2.Call
 import retrofit2.Response
@@ -21,7 +18,8 @@ import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 import retrofit2.http.GET
 import retrofit2.http.Query
-
+import java.util.*
+import kotlin.concurrent.thread
 
 
 interface RickApi {
@@ -47,23 +45,46 @@ fun rickapi():RickApi{
     version = 1
 )
 abstract class AppDatabase : RoomDatabase() {
+
     abstract val personDao: PersonDao
 }
+val APP_PREFERENCES = "mysettings"
+val APP_PREFERENCES_TIME = "time_cash"
+//var mSettings: SharedPreferences? = null
 
-
-class MyViewModel : ViewModel( ) {
-
+@RequiresApi(Build.VERSION_CODES.O)
+class MyViewModel(mSettings: SharedPreferences, db: AppDatabase) : ViewModel() {
+    var time:Long?=0
     var name: MutableLiveData<List<ListItemData>> = MutableLiveData()
     init {
-        ///generate()
-        //name== db.personDao.allPeople
-       // println(name)
-        generate()
-       // db.personDao.insertAll(name)
-       // name== db.personDao.allPeople
-       // println(name)
+        val editor: SharedPreferences.Editor = mSettings.edit()
+        if (!mSettings.contains(APP_PREFERENCES_TIME)){//запустили впервые
+            editor.putString(APP_PREFERENCES_TIME, Date().time.toString())
+            editor.commit()
+
+        }
+        else {//обновили время
+            time= mSettings.getString(APP_PREFERENCES_TIME, "")?.toLong()
+            editor.clear()
+            editor.putString(APP_PREFERENCES_TIME, Date().time.toString())
+            editor.commit()
+
+        }
+        var t=time ?: 0.toLong()
+        if ((t==0.toLong())|| (Date().time -t  >3600*1000)){// впервые/час прошёл
+
+            generate(db)}
+
+        else{
+    viewModelScope.launch(Dispatchers.IO) {
+        supervisorScope {
+            name.postValue( db.personDao.getUsers())
+
+        }}
+        }
+
     }
-    private fun generate() = viewModelScope.launch(Dispatchers.IO) {
+    private fun generate(db: AppDatabase) = viewModelScope.launch(Dispatchers.IO) {
         supervisorScope {
             val rickApi = rickapi()
             val k = 42
@@ -82,8 +103,25 @@ class MyViewModel : ViewModel( ) {
                         acc + cur
                     }?.sortedBy { it.id } ?: emptyList()
             } )
+            db.personDao.insertUser(listOfResults.let { responseList ->
+                responseList.mapNotNull { it.body()?.ListItemData?.toList() }
+                    .reduceRightOrNull() { cur, acc ->
+                        acc + cur
+                    }?.sortedBy { it.id } ?: emptyList()
+            } )
         }
     }}
+
+
+
+///generate
+//()
+//name== db.personDao.allPeople
+// println(name)
+
+// db.personDao.insertAll(name)
+// name== db.personDao.allPeople
+// println(name)
 
 
 
