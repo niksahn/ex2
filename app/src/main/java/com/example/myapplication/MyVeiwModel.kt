@@ -50,24 +50,25 @@ abstract class AppDatabase : RoomDatabase() {
 }
 val APP_PREFERENCES = "mysettings"
 val APP_PREFERENCES_TIME = "time_cash"
-//var mSettings: SharedPreferences? = null
 
-@RequiresApi(Build.VERSION_CODES.O)
-class MyViewModel(mSettings: SharedPreferences, db: AppDatabase) : ViewModel() {
+class MyViewModel : ViewModel() {
+
     var time:Long?=0
     var name: MutableLiveData<List<ListItemData>> = MutableLiveData()
     init {
+        var mSettings=App.mSettings!!
+        var db=App.db!!
         val editor: SharedPreferences.Editor = mSettings.edit()
         if (!mSettings.contains(APP_PREFERENCES_TIME)){//запустили впервые
             editor.putString(APP_PREFERENCES_TIME, Date().time.toString())
-            editor.commit()
+            editor.apply()
 
         }
         else {//обновили время
             time= mSettings.getString(APP_PREFERENCES_TIME, "")?.toLong()
-            editor.clear()
+
             editor.putString(APP_PREFERENCES_TIME, Date().time.toString())
-            editor.commit()
+            editor.apply()
 
         }
         var t=time ?: 0.toLong()

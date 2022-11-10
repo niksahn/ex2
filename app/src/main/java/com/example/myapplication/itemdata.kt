@@ -1,11 +1,7 @@
 package com.example.myapplication;
 
-import android.os.Build
-import androidx.annotation.RequiresApi
-import androidx.lifecycle.MutableLiveData
 import androidx.room.*
 import com.google.gson.annotations.SerializedName
-import io.reactivex.rxjava3.core.Completable
 import kotlin.collections.ArrayList
 
 data class rezults (
@@ -65,7 +61,7 @@ data class ListItemData(
 interface PersonDao {
 
     @Query("SELECT * FROM users")
-    fun getUsers(): List<ListItemData>
+     fun getUsers(): List<ListItemData>
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     fun insertUser(users: List<ListItemData>)
 }

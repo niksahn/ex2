@@ -1,38 +1,20 @@
 package com.example.myapplication
 
-import android.content.Context
-import android.content.SharedPreferences
-import android.os.Build
 
 import android.os.Bundle
 import android.widget.AutoCompleteTextView
 import android.widget.Button
 import androidx.activity.viewModels
-import androidx.annotation.RequiresApi
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import androidx.room.Room
-import java.time.Instant
-
-
 val adapter = CustomRecyclerAdapter()
 class MainActivity : AppCompatActivity() {
 
+    private val viewModel by viewModels<MyViewModel>()
 
-    @RequiresApi(Build.VERSION_CODES.O)
     override fun onCreate(savedInstanceState: Bundle?) {
 
-
-        val mSettings = getSharedPreferences(APP_PREFERENCES, Context.MODE_PRIVATE)
-
-
-
-        val db = Room.databaseBuilder(
-            applicationContext ,
-            AppDatabase::class.java, "pers.db"
-        ).build()
-        val viewModel=MyViewModel(mSettings,db)
 
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
