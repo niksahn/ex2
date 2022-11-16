@@ -1,18 +1,21 @@
-package com.example.myapplication
+package com.example.myapplication.Main.Veiw
 
 
 import android.os.Bundle
 import android.widget.AutoCompleteTextView
 import android.widget.Button
-import androidx.activity.viewModels
+import org.koin.androidx.viewmodel.ext.android.viewModel
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.example.myapplication.Main.Adapter.CustomRecyclerAdapter
+import com.example.myapplication.Main.VeiwModel.MyViewModel
+import com.example.myapplication.R
+
 val adapter = CustomRecyclerAdapter()
+
 class MainActivity : AppCompatActivity() {
-
-    private val viewModel by viewModels<MyViewModel>()
-
+    private val viewModel : MyViewModel by viewModel()
     override fun onCreate(savedInstanceState: Bundle?) {
 
 

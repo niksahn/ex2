@@ -1,4 +1,4 @@
-package com.example.myapplication;
+package com.example.myapplication.data.model
 
 import androidx.room.*
 import com.google.gson.annotations.SerializedName
@@ -37,7 +37,7 @@ data class Location (
 
 @Entity(tableName = "users")
 data class ListItemData(
-    @PrimaryKey @SerializedName("id"       ) var id: Int              = 0,
+    @PrimaryKey @SerializedName("id") var id: Int = 0,
     @SerializedName("name"     ) var name: String?           = null,
     @SerializedName("status"   ) var status: String?           = null,
     @SerializedName("species"  ) var species: String?           = null,
@@ -54,17 +54,6 @@ data class ListItemData(
     @SerializedName("created"  ) var created: String?           = null
 
 )
-
-
-
-@Dao
-interface PersonDao {
-
-    @Query("SELECT * FROM users")
-     fun getUsers(): List<ListItemData>
-    @Insert(onConflict = OnConflictStrategy.REPLACE)
-    fun insertUser(users: List<ListItemData>)
-}
 
 
 

@@ -1,14 +1,16 @@
-package com.example.myapplication
+package com.example.myapplication.Main.Adapter
 
 import android.content.Intent
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
-import android.widget.LinearLayout
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
+import com.example.myapplication.Main.Veiw.MainActivity2
+import com.example.myapplication.R
+import com.example.myapplication.data.model.ListItemData
 
 
 class CustomRecyclerAdapter() :

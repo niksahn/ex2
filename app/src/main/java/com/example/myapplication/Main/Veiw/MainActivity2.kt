@@ -1,12 +1,12 @@
-package com.example.myapplication
+package com.example.myapplication.Main.Veiw
 
-import android.content.Intent
 import android.os.Bundle
 import android.view.View
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
 import com.bumptech.glide.Glide
+import com.example.myapplication.R
 
 
 class  MainActivity2 : AppCompatActivity() {
