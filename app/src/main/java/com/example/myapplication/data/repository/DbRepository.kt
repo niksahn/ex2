@@ -5,6 +5,6 @@ import com.example.myapplication.data.model.rezults
 import retrofit2.Response
 
 interface DbRepository {
-    fun insertPers():List<ListItemData>
+    fun insertPers(): List<ListItemData>
     suspend fun insertPersFromApi(Apilist: List<Response<rezults>>)
 }

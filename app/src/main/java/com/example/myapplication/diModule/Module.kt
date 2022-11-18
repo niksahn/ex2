@@ -19,8 +19,8 @@ import retrofit2.converter.gson.GsonConverterFactory
 
 val dataModule = module {
     single<ApiRepository> { ApiRepositoryImpl(get()) }
-    single<DbRepository> {  DbRepositoryImpl(get()) }
-    single<SharedPreferencesRepository> {  SharedPreferencesRepositoryImpl(get()) }
+    single<DbRepository> { DbRepositoryImpl(get()) }
+    single<SharedPreferencesRepository> { SharedPreferencesRepositoryImpl(get()) }
     single {
         val retrofit = Retrofit.Builder()
             .baseUrl(baseurl)
