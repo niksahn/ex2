@@ -10,6 +10,7 @@ import com.example.myapplication.data.model.ListItemData
 interface PersonDao {
     @Query("SELECT * FROM users")
     fun getUsers(): List<ListItemData>
+
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     suspend fun insertUser(users: List<ListItemData>)
 }

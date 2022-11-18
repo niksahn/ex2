@@ -5,7 +5,7 @@ import androidx.room.RoomDatabase
 import com.example.myapplication.data.model.ListItemData
 
 @Database(
-    entities = [ListItemData::class ],
+    entities = [ListItemData::class],
     version = 1
 )
 abstract class AppDatabase : RoomDatabase() {

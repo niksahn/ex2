@@ -1,4 +1,3 @@
-
 plugins {
     id 'com.android.application'
     id 'org.jetbrains.kotlin.android'
@@ -46,7 +45,7 @@ dependencies {
 
     //room
     implementation "androidx.room:room-runtime:$version"
-    kapt  "androidx.room:room-compiler:$version"
+    kapt "androidx.room:room-compiler:$version"
     implementation "androidx.room:room-ktx:$version"
     testImplementation "androidx.room:room-testing:$version"
 

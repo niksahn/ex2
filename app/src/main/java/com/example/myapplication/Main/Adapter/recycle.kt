@@ -1,6 +1,5 @@
 package com.example.myapplication.Main.Adapter
 
-import android.content.Intent
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -8,14 +7,13 @@ import android.widget.ImageView
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
-import com.example.myapplication.Main.Veiw.MainActivity2
 import com.example.myapplication.R
 import com.example.myapplication.data.model.ListItemData
 
 
-class CustomRecyclerAdapter() :
+class CustomRecyclerAdapter :
     RecyclerView.Adapter<CustomRecyclerAdapter.MyViewHolder>() {
-    var string: String=""
+    var string: String = ""
         set(value) {
             field = value
             notifyDataSetChanged()
@@ -25,7 +23,11 @@ class CustomRecyclerAdapter() :
             field = value
             notifyDataSetChanged()
         }
+    var click: ((i: Int, holder: MyViewHolder,name: List<ListItemData>) -> Unit?)? =null
+        set(value) {
+            field = value
 
+        }
 
     class MyViewHolder(item: View) : RecyclerView.ViewHolder(item) {
 
@@ -46,33 +48,22 @@ class CustomRecyclerAdapter() :
     override fun onBindViewHolder(holder: MyViewHolder, position: Int) {
         holder.title.text = name[position].name
 
-        holder.subtitle.text ="type: " +name[position].species + ", status:" +name[position].status
-        holder.itemView.setOnClickListener { click(position, holder) }
+        holder.subtitle.text =
+            "type: " + name[position].species + ", status:" + name[position].status
+        holder.itemView.setOnClickListener { click?.let { it1 -> it1(position, holder,name) } }
         Glide
             .with(holder.imageView1)
             .load(name[position].image)
             .into(holder.imageView1)
-        if(name[position].name?.contains(string)==false)
-        {
+        if (name[position].name?.contains(string) == false) {
             holder.itemView.layoutParams.height = 0
             holder.itemView.visibility = View.GONE
 
-        }
-        else{ holder.itemView.layoutParams.height = 750
+        } else {
+            holder.itemView.layoutParams.height = 750
             holder.itemView.visibility = View.VISIBLE
-            }
+        }
     }
-
-    fun click(i: Int, holder: MyViewHolder) {
-        val secondActi = Intent(holder.cont, MainActivity2::class.java)
-        val text1 = name[i].name
-        val text2 = " type: " +name[i].species + ", status:" +name[i].status
-        secondActi.putExtra(MainActivity2.text1, text1)
-        secondActi.putExtra(MainActivity2.text2, text2)
-        secondActi.putExtra(MainActivity2.piture, name[i].image)
-        holder.cont.startActivity(secondActi)
-    }
-
     override fun getItemCount() = name.size
 }
 
