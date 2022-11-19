@@ -5,12 +5,12 @@ import android.content.Context
 import androidx.room.Room
 import com.example.myapplication.Constants.APP_PREFERENCES
 import com.example.myapplication.Constants.baseurl
-import com.example.myapplication.Main.VeiwModel.MyViewModel
-import com.example.myapplication.data.Room.AppDatabase
+import com.example.myapplication.main.veiwModel.MyViewModel
+import com.example.myapplication.data.room.AppDatabase
 import com.example.myapplication.data.api.RickApi
 import com.example.myapplication.data.repository.*
-import com.example.myapplication.main.Interactor
-import com.example.myapplication.main.InteractorImpl
+import com.example.myapplication.domain.interactor.Interactor
+import com.example.myapplication.domain.interactor.InteractorImpl
 import org.koin.android.ext.koin.androidContext
 import org.koin.androidx.viewmodel.dsl.viewModel
 import org.koin.dsl.module

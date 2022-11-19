@@ -23,11 +23,7 @@ class CustomRecyclerAdapter :
             field = value
             notifyDataSetChanged()
         }
-    var click: ((i: Int, holder: MyViewHolder,name: List<ListItemData>) -> Unit?)? =null
-        set(value) {
-            field = value
-
-        }
+    var click: ((i: Int, holder: MyViewHolder, name: List<ListItemData>) -> Unit?)? = null
 
     class MyViewHolder(item: View) : RecyclerView.ViewHolder(item) {
 
@@ -50,7 +46,7 @@ class CustomRecyclerAdapter :
 
         holder.subtitle.text =
             "type: " + name[position].species + ", status:" + name[position].status
-        holder.itemView.setOnClickListener { click?.let { it1 -> it1(position, holder,name) } }
+        holder.itemView.setOnClickListener { click?.let { it1 -> it1(position, holder, name) } }
         Glide
             .with(holder.imageView1)
             .load(name[position].image)
@@ -64,6 +60,7 @@ class CustomRecyclerAdapter :
             holder.itemView.visibility = View.VISIBLE
         }
     }
+
     override fun getItemCount() = name.size
 }
 

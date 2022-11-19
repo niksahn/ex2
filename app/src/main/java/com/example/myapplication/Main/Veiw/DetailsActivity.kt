@@ -1,4 +1,4 @@
-package com.example.myapplication.Main.Veiw
+package com.example.myapplication.main.veiw
 
 import android.os.Bundle
 import android.widget.ImageView
@@ -20,7 +20,7 @@ class DetailsActivity : AppCompatActivity() {
         textView1 = findViewById(R.id.textVw1)
         imageView1 = findViewById(R.id.imageView)
         title = findViewById(R.id.toolbar)
-        title.setOnClickListener {   returnTo() }
+        title.setOnClickListener { returnTo() }
         show()
     }
 
@@ -43,7 +43,7 @@ class DetailsActivity : AppCompatActivity() {
         Glide
             .with(this)
             .load(imagine)
-            .into(this.imageView1);
+            .into(this.imageView1)
         val inttext1 = intent.getStringExtra(text1)
         val inttext2 = intent.getStringExtra(text2)
         textView1.text = inttext1

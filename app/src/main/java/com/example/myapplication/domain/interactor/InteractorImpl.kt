@@ -1,4 +1,4 @@
-package com.example.myapplication.main
+package com.example.myapplication.domain.interactor
 
 import com.example.myapplication.Constants
 import com.example.myapplication.data.model.ListItemData
@@ -7,15 +7,18 @@ import com.example.myapplication.data.repository.DbRepository
 import com.example.myapplication.data.repository.SharedPreferencesRepository
 import java.util.*
 
-class InteractorImpl(private val SharedPreferencesRepository: SharedPreferencesRepository, private val ApiRepository: ApiRepository, private val DbRepository: DbRepository):Interactor {
+class InteractorImpl(
+    private val SharedPreferencesRepository: SharedPreferencesRepository,
+    private val ApiRepository: ApiRepository,
+    private val DbRepository: DbRepository
+) : Interactor {
 
     override fun setTime(): Long? {
         var time: Long? = 0
-        val editor=SharedPreferencesRepository.timeEditor()
+        val editor = SharedPreferencesRepository.timeEditor()
         if (!SharedPreferencesRepository.created()) {//запустили впервые
             editor.putString(Constants.APP_PREFERENCES_TIME, Date().time.toString())
             editor.apply()
-
         } else {//обновили время
             time = SharedPreferencesRepository.timeSetting()
             editor.putString(Constants.APP_PREFERENCES_TIME, Date().time.toString())
@@ -24,21 +27,18 @@ class InteractorImpl(private val SharedPreferencesRepository: SharedPreferencesR
         }
         return time
     }
-  override suspend fun setRezults():  List<ListItemData>{
-    val joblist=ApiRepository.getApiRezults()
-     return joblist.let { responseList ->
-          responseList.mapNotNull { it.body()?.ListItemData?.toList() }
-              .reduceRightOrNull() { cur, acc ->
-                  acc + cur
-              }?.sortedBy { it.id } ?: emptyList()
-      }
 
+    override suspend fun setRezults(): List<ListItemData> {
+        val joblist = ApiRepository.getApiRezults()
+        return joblist.map { it.toListItemData() }
+    }
 
-  }
     override suspend fun setRezultsList() {
         DbRepository.insertPersFromApi(ApiRepository.getApiRezults())
     }
 
-    override fun insertPeers(): List<ListItemData> {return DbRepository.insertPers()}
+    override fun insertPeers(): List<ListItemData> {
+        return DbRepository.insertPers().map { it.toListItemData() }
+    }
 
 }

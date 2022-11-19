@@ -1,4 +1,4 @@
-package com.example.myapplication.main.Veiw
+package com.example.myapplication.main.veiw
 
 
 import android.content.Intent
@@ -9,8 +9,7 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.myapplication.Main.Adapter.CustomRecyclerAdapter
-import com.example.myapplication.Main.Veiw.DetailsActivity
-import com.example.myapplication.Main.VeiwModel.MyViewModel
+import com.example.myapplication.main.veiwModel.MyViewModel
 import com.example.myapplication.R
 import com.example.myapplication.data.model.ListItemData
 import org.koin.androidx.viewmodel.ext.android.viewModel
@@ -32,7 +31,7 @@ class MainActivity : AppCompatActivity() {
         viewModel.name.observe(this) {
             it?.let {
                 adapter.name = it
-                adapter.click=::clickItem
+                adapter.click = ::clickItem
             }
         }
         button.setOnClickListener {
@@ -40,16 +39,20 @@ class MainActivity : AppCompatActivity() {
                 it?.let {
                     adapter.name = it
                     adapter.string = autoCompleteTextView.text.toString()
-                    adapter.click=::clickItem
+                    adapter.click = ::clickItem
 
                 }
             }
         }
 
 
-        }
+    }
 
-   private fun clickItem(i: Int, holder: CustomRecyclerAdapter.MyViewHolder,name: List<ListItemData>) {
+    private fun clickItem(
+        i: Int,
+        holder: CustomRecyclerAdapter.MyViewHolder,
+        name: List<ListItemData>
+    ) {
         val secondActi = Intent(holder.cont, DetailsActivity::class.java)
         val text1 = name[i].name
         val text2 = " type: " + name[i].species + ", status:" + name[i].status
