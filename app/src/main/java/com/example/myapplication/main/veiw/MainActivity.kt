@@ -8,7 +8,7 @@ import android.widget.Button
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import com.example.myapplication.Main.Adapter.CustomRecyclerAdapter
+import com.example.myapplication.main.adapter.CustomRecyclerAdapter
 import com.example.myapplication.main.veiwModel.MyViewModel
 import com.example.myapplication.R
 import com.example.myapplication.data.model.ListItemData

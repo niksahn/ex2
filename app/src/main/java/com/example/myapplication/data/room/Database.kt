@@ -1,11 +1,11 @@
-package com.example.myapplication.data.Room
+package com.example.myapplication.data.room
 
 import androidx.room.Database
 import androidx.room.RoomDatabase
-import com.example.myapplication.data.model.ListItemData
+import com.example.myapplication.data.model.ListItemDataEntity
 
 @Database(
-    entities = [ListItemData::class],
+    entities = [ListItemDataEntity::class],
     version = 1
 )
 abstract class AppDatabase : RoomDatabase() {
