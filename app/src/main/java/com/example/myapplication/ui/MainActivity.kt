@@ -1,22 +1,38 @@
-package com.example.myapplication.main.veiw
+package com.example.myapplication.ui
 
 
-import android.content.Intent
 import android.os.Bundle
-import android.widget.AutoCompleteTextView
-import android.widget.Button
-import androidx.appcompat.app.AppCompatActivity
-import androidx.recyclerview.widget.LinearLayoutManager
-import androidx.recyclerview.widget.RecyclerView
-import com.example.myapplication.main.adapter.CustomRecyclerAdapter
-import com.example.myapplication.main.veiwModel.MyViewModel
-import com.example.myapplication.R
-import com.example.myapplication.data.model.ListItemData
-import org.koin.androidx.viewmodel.ext.android.viewModel
+import androidx.activity.ComponentActivity
+import androidx.activity.compose.setContent
+import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.material.MaterialTheme
+import androidx.compose.material.Surface
+import androidx.compose.ui.Modifier
+import com.example.examplet.ui.theme.ExampleTTheme
+import com.example.myapplication.ui.list.NavGraphs
+import com.ramcosta.composedestinations.DestinationsNavHost
 
 
-class MainActivity : AppCompatActivity() {
-    val adapter = CustomRecyclerAdapter()
+class MainActivity : ComponentActivity() {
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        setContent {
+            ExampleTTheme {
+                Surface(
+                    modifier = Modifier.fillMaxSize(),
+                    color = MaterialTheme.colors.background
+                ) {
+                    DestinationsNavHost(
+                        modifier = Modifier
+                            .fillMaxSize(),
+                        navGraph = NavGraphs.root
+                    )
+                }
+            }
+        }
+    }
+}
+/*    val adapter = CustomRecyclerAdapter()
     private val viewModel: MyViewModel by viewModel()
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -60,9 +76,7 @@ class MainActivity : AppCompatActivity() {
         secondActi.putExtra(DetailsActivity.text2, text2)
         secondActi.putExtra(DetailsActivity.picture, name[i].image)
         holder.cont.startActivity(secondActi)
-    }
-
-}
+    } */
 
 
 

@@ -1,7 +1,7 @@
 package com.example.myapplication.data.repository
 
-import com.example.myapplication.data.room.AppDatabase
 import com.example.myapplication.data.model.ListItemDataDto
+import com.example.myapplication.data.room.AppDatabase
 
 class DbRepositoryImpl(private val db: AppDatabase) : DbRepository {
     override fun insertPers() = db.personDao.getUsers()

@@ -1,13 +1,6 @@
-package com.example.myapplication.main.veiw
+package com.example.myapplication.ui.moreInf
 
-import android.os.Bundle
-import android.widget.ImageView
-import android.widget.TextView
-import androidx.appcompat.app.AppCompatActivity
-import com.bumptech.glide.Glide
-import com.example.myapplication.R
-
-
+/*
 class DetailsActivity : AppCompatActivity() {
     private lateinit var textView1: TextView
     private lateinit var textView2: TextView
@@ -52,3 +45,4 @@ class DetailsActivity : AppCompatActivity() {
     }
 
 }
+*/
