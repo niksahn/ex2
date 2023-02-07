@@ -10,6 +10,7 @@ import com.example.myapplication.data.repository.*
 import com.example.myapplication.data.room.AppDatabase
 import com.example.myapplication.domain.interactor.Interactor
 import com.example.myapplication.domain.interactor.InteractorImpl
+import com.example.myapplication.ui.inf.InfViewModel
 import com.example.myapplication.ui.veiwModel.MyViewModel
 import org.koin.android.ext.koin.androidContext
 import org.koin.androidx.viewmodel.dsl.viewModel
@@ -48,6 +49,10 @@ val viewModelModule = module {
     viewModel {
         MyViewModel(get())
     }
+    single {
+        InfViewModel(get())
+    }
+
 }
 
 

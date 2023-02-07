@@ -12,7 +12,6 @@ class InteractorImpl(
     private val ApiRepository: ApiRepository,
     private val DbRepository: DbRepository
 ) : Interactor {
-
     override fun setTime(): Long? {
         var time: Long? = 0
         val editor = SharedPreferencesRepository.timeEditor()
@@ -37,7 +36,7 @@ class InteractorImpl(
         DbRepository.insertPersFromApi(ApiRepository.getApiRezults())
     }
 
-    override fun insertPeers(): List<ListItemData> {
+    override fun getPeers(): List<ListItemData> {
         return DbRepository.insertPers().map { it.toListItemData() }
     }
 

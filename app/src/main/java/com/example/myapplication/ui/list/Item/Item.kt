@@ -12,11 +12,12 @@ import androidx.compose.ui.unit.dp
 import com.bumptech.glide.integration.compose.ExperimentalGlideComposeApi
 import com.bumptech.glide.integration.compose.GlideImage
 import com.example.myapplication.data.model.ListItemData
+import com.example.myapplication.ui.list.ListItem
 
 @OptIn(ExperimentalGlideComposeApi::class)
 @Composable
 fun MyListItem(
-    data: ListItemData,
+    data: ListItem,
     modifier: Modifier = Modifier
 ) {
     Card(

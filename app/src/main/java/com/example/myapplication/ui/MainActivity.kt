@@ -9,7 +9,6 @@ import androidx.compose.material.MaterialTheme
 import androidx.compose.material.Surface
 import androidx.compose.ui.Modifier
 import com.example.examplet.ui.theme.ExampleTTheme
-import com.example.myapplication.ui.list.NavGraphs
 import com.ramcosta.composedestinations.DestinationsNavHost
 
 

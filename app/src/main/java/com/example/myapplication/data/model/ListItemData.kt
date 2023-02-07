@@ -11,6 +11,6 @@ data class ListItemData(
     var image: String? = null,
     var url: String? = null,
     var created: String? = null
-
 )
+
 
