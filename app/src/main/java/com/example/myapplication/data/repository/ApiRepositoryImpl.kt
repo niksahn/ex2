@@ -9,9 +9,10 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.async
 import kotlinx.coroutines.withContext
 import retrofit2.Response
+import javax.inject.Inject
 
 
-class ApiRepositoryImpl(private val rickApi: RickApi) : ApiRepository {
+class ApiRepositoryImpl @Inject constructor(private val rickApi: RickApi) : ApiRepository {
     override suspend fun getApiRezults(): List<ListItemDataDto> {
         val k = 42
         val jobList = mutableListOf<Deferred<Response<rezultsDto>>>()

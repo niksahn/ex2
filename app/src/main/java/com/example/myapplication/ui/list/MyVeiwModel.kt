@@ -7,12 +7,16 @@ import com.example.myapplication.ui.list.ListItem
 import com.example.myapplication.ui.list.ListState
 import com.example.myapplication.ui.list.mapToListItem
 import com.example.myapplication.utils.base.BaseViewModel
+import dagger.hilt.android.lifecycle.HiltViewModel
 import java.util.*
+import javax.inject.Inject
 
 
-class MyViewModel(private val interactor: Interactor) : BaseViewModel<ListState, ListEvent>(
-    ListState()
-) {
+@HiltViewModel
+class MyViewModel @Inject constructor(private val interactor: Interactor) :
+    BaseViewModel<ListState, ListEvent>(
+        ListState()
+    ) {
 
     private var time: Long? = 0
 
@@ -20,7 +24,7 @@ class MyViewModel(private val interactor: Interactor) : BaseViewModel<ListState,
         println("KKK")
         time = interactor.setTime()
         val t = time ?: 0.toLong()
-        if ((t == 0.toLong()) || (Date().time - t > 3600*100)) {// впервые/час прошёл
+        if ((t == 0.toLong()) || (Date().time - t > 3600 * 100)) {// впервые/час прошёл
             makingNameFromApi()
         } else {
             launchViewModelScope {

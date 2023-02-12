@@ -6,8 +6,9 @@ import com.example.myapplication.data.repository.ApiRepository
 import com.example.myapplication.data.repository.DbRepository
 import com.example.myapplication.data.repository.SharedPreferencesRepository
 import java.util.*
+import javax.inject.Inject
 
-class InteractorImpl(
+class InteractorImpl @Inject constructor(
     private val SharedPreferencesRepository: SharedPreferencesRepository,
     private val ApiRepository: ApiRepository,
     private val DbRepository: DbRepository

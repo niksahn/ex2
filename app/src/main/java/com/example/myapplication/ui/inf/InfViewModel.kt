@@ -1,21 +1,28 @@
 package com.example.myapplication.ui.inf
 
+import com.example.myapplication.data.model.PressedButton
 import com.example.myapplication.domain.interactor.Interactor
-import com.example.myapplication.ui.list.ListEvent
-import com.example.myapplication.ui.list.ListState
 import com.example.myapplication.utils.base.BaseViewModel
+import dagger.hilt.android.lifecycle.HiltViewModel
+import javax.inject.Inject
+import javax.inject.Singleton
 
-class InfViewModel(private val interactor: Interactor): BaseViewModel<InfState, InfEvent>(
-    InfState()
-) {
+@HiltViewModel
+class InfViewModel @Inject constructor(private val interactor: Interactor) :
 
-fun getData() {
-    launchViewModelScope {
-    updateState {
-        it.copy(values=(interactor.getPeers()[screenState.value.id]).mapToValueOfPerson())
-    }}
-}
-    fun onBack(){
+    BaseViewModel<InfState, InfEvent>(
+        InfState()
+    ) {
+
+    fun getData() {
+        launchViewModelScope {
+            updateState {
+                it.copy(values = (interactor.getPeers()[PressedButton.id]).mapToValueOfPerson())
+            }
+        }
+    }
+
+    fun onBack() {
         trySendEvent(InfEvent.goBack)
     }
 

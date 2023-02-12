@@ -10,7 +10,7 @@ data class ListItemData(
     var gender: String? = null,
     var image: String? = null,
     var url: String? = null,
-    var created: String? = null
+    var created: String? = null,
 )
 
 

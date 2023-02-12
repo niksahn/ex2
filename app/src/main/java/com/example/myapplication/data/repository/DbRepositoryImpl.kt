@@ -2,8 +2,9 @@ package com.example.myapplication.data.repository
 
 import com.example.myapplication.data.model.ListItemDataDto
 import com.example.myapplication.data.room.AppDatabase
+import javax.inject.Inject
 
-class DbRepositoryImpl(private val db: AppDatabase) : DbRepository {
+class DbRepositoryImpl @Inject constructor(private val db: AppDatabase) : DbRepository {
     override fun insertPers() = db.personDao.getUsers()
 
     override suspend fun insertPersFromApi(Apilist: List<ListItemDataDto>) {

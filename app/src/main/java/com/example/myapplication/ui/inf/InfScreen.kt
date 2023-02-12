@@ -7,29 +7,23 @@ import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.ArrowBack
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
-import androidx.compose.runtime.State
 import androidx.compose.runtime.getValue
-import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
+import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import com.bumptech.glide.integration.compose.ExperimentalGlideComposeApi
 import com.bumptech.glide.integration.compose.GlideImage
-import com.example.myapplication.R
-import com.example.myapplication.ui.destinations.InfScreenDestination
-import com.example.myapplication.ui.list.ListEvent
-import com.example.myapplication.ui.list.ListState
 import com.ramcosta.composedestinations.annotation.Destination
 import com.ramcosta.composedestinations.navigation.DestinationsNavigator
-import org.koin.androidx.compose.koinViewModel
 
 @Destination
 @Composable
-fun InfScreen(navigator: DestinationsNavigator,
-)
-{    val infViewModel= koinViewModel<InfViewModel>()
+fun InfScreen (navigator: DestinationsNavigator,
+              infViewModel: InfViewModel = hiltViewModel()
+) {
+
     infViewModel.getData()
     val state by infViewModel.screenState.collectAsStateWithLifecycle()
     LaunchedEffect(Unit) {
@@ -74,7 +68,7 @@ fun InfScreenContent(
         Row(
             modifier = Modifier
                 .fillMaxSize()
-             //   .weight(1f)
+                //   .weight(1f)
 
                 .padding(5.dp),
 
