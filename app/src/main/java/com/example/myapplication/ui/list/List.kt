@@ -1,15 +1,19 @@
 package com.example.myapplication.ui.list
 
+import androidx.compose.animation.AnimatedVisibility
 import androidx.compose.animation.ExperimentalAnimationApi
+import androidx.compose.animation.core.tween
+import androidx.compose.animation.fadeIn
+import androidx.compose.animation.fadeOut
 import androidx.compose.foundation.ExperimentalFoundationApi
+import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.itemsIndexed
-import androidx.compose.material.CircularProgressIndicator
-import androidx.compose.material.Scaffold
-import androidx.compose.material.Text
-import androidx.compose.material.TopAppBar
+import androidx.compose.material.*
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.Search
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
@@ -23,7 +27,6 @@ import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import com.example.myapplication.R
 import com.example.myapplication.data.model.PressedButton
 import com.example.myapplication.ui.destinations.InfScreenDestination
-import com.example.myapplication.ui.inf.InfViewModel
 import com.example.myapplication.ui.list.Item.MyListItem
 import com.example.myapplication.ui.veiwModel.MyViewModel
 import com.ramcosta.composedestinations.annotation.Destination
@@ -50,15 +53,15 @@ fun ListScreen(
             when (it) {
                 is ListEvent.GoToInf -> {
                     index = it.index
-                    PressedButton.id=index
-                   // infViewModel.updateState { it.copy(id = index) }
+                    PressedButton.id = index
+                    // infViewModel.updateState { it.copy(id = index) }
                     navigator.navigate(InfScreenDestination.route)
                 }
 
             }
         }
     }
-    ListScreenContent(state,viewModel::onClickItem)
+    ListScreenContent(state, viewModel::onClickItem,viewModel::searching)
 }
 
 @OptIn(ExperimentalFoundationApi::class, ExperimentalAnimationApi::class)
@@ -66,7 +69,8 @@ fun ListScreen(
 fun ListScreenContent(
     state:
     ListState,
-     onClickItem: (Int) -> Unit,
+    onClickItem: (Int) -> Unit,
+    searching: (String) -> Unit,
     // onBack: () -> Unit,
 ) {
     Scaffold(
@@ -77,6 +81,7 @@ fun ListScreenContent(
                 )
         }
     ) {
+
         Box(
             modifier = Modifier
                 .fillMaxSize()
@@ -86,23 +91,46 @@ fun ListScreenContent(
             if (state.isLoading) {
                 CircularProgressIndicator()
             } else {
+                Column(modifier = Modifier.fillMaxSize(),
+                    ){
+                OutlinedTextField (
+                    value=state.searching,onValueChange ={searching(it) },
+                    modifier = Modifier.fillMaxWidth().background(color = MaterialTheme.colors.background),
+                    placeholder = { Text("searching") },
+                    leadingIcon = { Icon(Icons.Filled.Search, contentDescription = "searching") }
+                )
+                Spacer(modifier = Modifier.height(5.dp))
                 LazyColumn(
-                    modifier = Modifier
-                        .fillMaxSize(),
-                    verticalArrangement = Arrangement.spacedBy(8.dp),
+                    modifier = Modifier,
+                   // verticalArrangement = Arrangement.spacedBy(8.dp),
                     contentPadding = PaddingValues(horizontal = 8.dp)
                 ) {
                     itemsIndexed(state.listOfItems) { index, itemData ->
+                        AnimatedVisibility(
+                            visible = itemData.visible,
+                            enter = fadeIn(
+                                // Overwrites the initial value of alpha to 0.4f for fade in, 0 by default
+                                initialAlpha = 0.4f
+                            ),
+                            exit = fadeOut(
+                                // Overwrites the default animation with tween
+                                animationSpec = tween(durationMillis = 250)
+                            )
+                        ){
                         MyListItem(
                             modifier = Modifier
                                 .fillMaxWidth()
                                 .clickable(onClick = remember(index) { { onClickItem(index) } })
-                                .animateItemPlacement(),
+                                .animateItemPlacement()
+                                ,
+
                             data = itemData
                         )
-                    }
+                            Spacer(modifier = Modifier.height(107.dp))
+                    } }
                 }
             }
+        }
         }
     }
 }

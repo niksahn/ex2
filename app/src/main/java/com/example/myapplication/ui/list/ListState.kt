@@ -5,7 +5,8 @@ import com.example.myapplication.utils.base.State
 
 data class ListState(
     var listOfItems: List<ListItem> = listOf(),
-    var isLoading: Boolean = true
+    var isLoading: Boolean = true,
+    var searching:String=""
 ) : State()
 
 data class ListItem(
@@ -14,7 +15,9 @@ data class ListItem(
     var status: String? = null,
     var species: String? = null,
     var image: String? = null,
+    var visible:Boolean=true
 )
+
 fun ListItemData.mapToListItem() =
     ListItem(
         name = name,

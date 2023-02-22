@@ -78,9 +78,10 @@ object domainModule {
         ApiRepository: ApiRepository,
         DbRepository: DbRepository
     ): Interactor = InteractorImpl(SharedPreferencesRepository, ApiRepository, DbRepository)
+
     @Singleton
     @Provides
-    fun ProvidesViewModel(interactor:Interactor):InfViewModel=InfViewModel(interactor)
+    fun ProvidesViewModel(interactor: Interactor): InfViewModel = InfViewModel(interactor)
 }
 
 

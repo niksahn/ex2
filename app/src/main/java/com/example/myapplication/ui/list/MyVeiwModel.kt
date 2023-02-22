@@ -10,6 +10,7 @@ import com.example.myapplication.utils.base.BaseViewModel
 import dagger.hilt.android.lifecycle.HiltViewModel
 import java.util.*
 import javax.inject.Inject
+import kotlin.collections.ArrayList
 
 
 @HiltViewModel
@@ -29,7 +30,8 @@ class MyViewModel @Inject constructor(private val interactor: Interactor) :
         } else {
             launchViewModelScope {
 
-                addNames(interactor.getPeers().map { it.mapToListItem() }) }
+                addNames(interactor.getPeers().map { it.mapToListItem() })
+            }
 
         }
 
@@ -44,14 +46,30 @@ class MyViewModel @Inject constructor(private val interactor: Interactor) :
     private fun addNames(list: List<ListItem>) {
         updateState {
             it.copy(
-                listOfItems = list ,
+                listOfItems = list,
                 isLoading = false
             )
         }
     }
-    fun onClickItem( index: Int){
-          trySendEvent(ListEvent.GoToInf(index))
+
+    fun onClickItem(index: Int) {
+        trySendEvent(ListEvent.GoToInf(index))
     }
+    fun searching(name: String)
+    {  var list: ArrayList<ListItem> = arrayListOf()
+        for (i in screenState.value.listOfItems)
+        {  var m=i
+            m.visible = i.name?.contains(name) != false
+            list.add(m)
+        }
+        updateState {
+           it.copy(
+               listOfItems = list,
+               searching = name
+           )
+        }
+    }
+
 }
 
 

@@ -20,8 +20,9 @@ import com.ramcosta.composedestinations.navigation.DestinationsNavigator
 
 @Destination
 @Composable
-fun InfScreen (navigator: DestinationsNavigator,
-              infViewModel: InfViewModel = hiltViewModel()
+fun InfScreen(
+    navigator: DestinationsNavigator,
+    infViewModel: InfViewModel = hiltViewModel()
 ) {
 
     infViewModel.getData()
@@ -29,26 +30,27 @@ fun InfScreen (navigator: DestinationsNavigator,
     LaunchedEffect(Unit) {
         infViewModel.event.collect {
             when (it) {
-                is InfEvent.goBack->navigator.navigateUp()
-
-                }
+                is InfEvent.goBack -> navigator.navigateUp()
 
             }
-        }
 
-    InfScreenContent(state,infViewModel::onBack)
+        }
+    }
+
+    InfScreenContent(state, infViewModel::onBack)
 }
+
 @OptIn(ExperimentalGlideComposeApi::class)
 @Composable
 fun InfScreenContent(
     state: InfState,
     //onClickItem: (Int) -> Unit,
-     onBack: () -> Unit,)
-{
+    onBack: () -> Unit,
+) {
     Scaffold(
         topBar = {
             TopAppBar(
-                title = { Text(state.values.name?:"") },
+                title = { Text(state.values.name ?: "") },
                 navigationIcon = {
                     Icon(
                         modifier = Modifier.clickable(onClick = onBack),
@@ -59,85 +61,80 @@ fun InfScreenContent(
             )
         }
     )
-    { Box(
-        modifier = Modifier
-            .fillMaxSize()
-            .padding(it),
-
-    ) {
-        Row(
+    {
+        Box(
             modifier = Modifier
                 .fillMaxSize()
-                //   .weight(1f)
+                .padding(it),
 
-                .padding(5.dp),
-
-
-        ) { Card(
-            modifier = Modifier/*.weight(1f)*/,
-            shape = MaterialTheme.shapes.large,
-            elevation = 10.dp,
-        ) {
-            GlideImage(
+            ) {
+            Row(
                 modifier = Modifier
-                    .fillMaxSize(0.42f)
-                    .height(0.dp)
-                    .padding(0.dp),
-                model = state.values.image,
+                    .fillMaxSize()
+                    //   .weight(1f)
 
-                contentDescription = null
-            ) {
-                it.fitCenter().centerCrop()
-            }}
-            Card(
-                modifier = Modifier.padding(start = 20.dp),
-                shape = MaterialTheme.shapes.large,
-                elevation = 10.dp,
-            ) {
-        Column(
-            modifier = Modifier
-               // .weight(1f)
-                .padding(0.dp),
-            verticalArrangement = Arrangement.spacedBy(8.dp)
-        ) {
+                    .padding(5.dp),
 
 
-            Text(
-                text = state.values.species ?: "",
-                style = MaterialTheme.typography.h5
-            )
+                ) {
+                Card(
+                    modifier = Modifier,/*.weight(1f)*/
+                    shape = MaterialTheme.shapes.large,
+                    elevation = 10.dp,
+                ) {
+                    GlideImage(
+                        modifier = Modifier
+                            .fillMaxSize(0.42f)
+                            .height(0.dp)
+                            .padding(0.dp),
+                        model = state.values.image,
+
+                        contentDescription = null
+                    ) {
+                        it.fitCenter().centerCrop()
+                    }
+                }
+                Card(
+                    modifier = Modifier.padding(start = 20.dp),
+                    shape = MaterialTheme.shapes.large,
+                    elevation = 10.dp,
+                ) {
+                    Column(
+                        modifier = Modifier
+                            // .weight(1f)
+                            .padding(0.dp),
+                        verticalArrangement = Arrangement.spacedBy(8.dp)
+                    ) {
 
 
-            Text(
-                text = state.values.status ?: "",
-                style = MaterialTheme.typography.h6.copy(Color.Gray)
-            )
+                        Text(
+                            text = state.values.species ?: "",
+                            style = MaterialTheme.typography.h5
+                        )
 
-            Text(
-                text = state.values.gender ?: "",
-                style = MaterialTheme.typography.h6.copy(Color.Gray)
-            )
-            Text(
-                text = state.values.type ?: "",
-                style = MaterialTheme.typography.h6.copy(Color.Gray)
-            )
 
+                        Text(
+                            text = state.values.status ?: "",
+                            style = MaterialTheme.typography.h6.copy(Color.Gray)
+                        )
+
+                        Text(
+                            text = state.values.gender ?: "",
+                            style = MaterialTheme.typography.h6.copy(Color.Gray)
+                        )
+                        Text(
+                            text = state.values.type ?: "",
+                            style = MaterialTheme.typography.h6.copy(Color.Gray)
+                        )
+
+
+                    }
+                }
+            }
 
         }
-    }}
-
-}}}
-
-
-
-
-
-
-
-
-
-
-
+    }
+}
 
 
 /*
